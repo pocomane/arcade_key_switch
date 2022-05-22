@@ -1,6 +1,8 @@
 
 # Arcade Key Switch MOD Documantation
 
+![Overview of the model](model.jpg)
+
 WORK IN PROGRESS! Sorry, still nothing here. I hope to add soon some info on:
 
 - How to mount the MOD on a Seimitsu LS-56

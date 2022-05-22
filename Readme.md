@@ -5,6 +5,8 @@ This repository contains the 3D models to mount common keyboard mechanical switc
 on commercial Arcade Sticks. It was designed for the Seimitsu LS-56 stick, however
 the models are parametrick so we hope you can easly adapt to other sticks.
 
+![Overview of the model](doc/model.jpg)
+
 # Feature
 
 - Seimitsu LS-56 support out-of-the-box.
