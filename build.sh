@@ -11,4 +11,5 @@ for B in $(cat main.scad | sed -n 's:^.*BUILD[ \t]*== [ \t]*"\([^"]*\)".*$:\1:gp
   echo "---------------------------------------------------------------------------"
   openscad -o "build/$B.stl" main.scad -D"BUILD=\"$B\""
 done
+tar -czf build/arcade_key_switch.tar.gz build/*.stl
 
