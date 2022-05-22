@@ -30,7 +30,7 @@ module inclinate(direction = [0, 0, 1]){
 // Make a slice of the children of a provided thickness. Anything starting from
 // the "start" point and distant "thick" in the provided "direction" will be
 // kept
-module slice(direction = [0, 0, 1], start = [0, 0, 0], thick = 10^6, debug = false){
+module slice(direction = [0, 0, 1], start = [0, 0, 0], thick = 10000000, debug = false){
   if (debug) {
     translate(start)sphere([1,1,1]);
   }
