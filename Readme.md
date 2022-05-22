@@ -6,7 +6,7 @@ mechanical switches on commercial Arcade Sticks. It was designed for the
 Seimitsu LS-56 stick, however the models are parametric so we hope you can
 easly adapt to other sticks.
 
-![Overview of the model](doc/model.jpg)
+![Overview of the model](doc/overview.jpg)
 
 # Feature
 

@@ -1,7 +1,7 @@
 
 # Arcade Key Switch MOD Documantation
 
-![Overview of the model](model.jpg)
+![Overview of the model](overview.jpg)
 
 WORK IN PROGRESS! Sorry, still nothing here. I hope to add soon some info on:
 
