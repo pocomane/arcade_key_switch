@@ -5,7 +5,7 @@ $fn=100;  // number of face for circle
 geo=0.1;  // geometrical/graphical error to let the surface correctly appear melted together
 tol=0.235; // mechanical tollerance to let pieces git togethe
 
-module housing(
+module arcade_key_switch(
 
   switch_distance = 33.2, //31.7,
   wall_thick = 4,
@@ -18,6 +18,9 @@ module housing(
   gate_border = 2.5,//2,
   gate_max_tick = 0.9,
   gate_plate_thick = 3,
+
+  add_housing = true,
+  add_gate = true,
 ){
 
   ff = switch_distance -2 * wall_thick;
@@ -156,9 +159,13 @@ module housing(
   module full(){
     difference(){
       union(){
-        translate([0,wall_thick,0]) color([1,1,0])four_side()extended_frame();
-        translate([0,wall_thick,0]) color([0,1,0])four_side()base();
-        translate([0,wall_thick,0]) color([0,0,1]) gate();
+        if (add_housing){
+          translate([0,wall_thick,0]) color([1,1,0])four_side()extended_frame();
+          translate([0,wall_thick,0]) color([0,1,0])four_side()base();
+        }
+        if (add_gate){
+          translate([0,wall_thick,0]) color([0,0,1])gate();
+        }
       }
       translate([0,wall_thick,0]) color([1,1,0])four_side()ls56_groove();
       translate([0,wall_thick,0])four_side()translate([(fff-ff)/2,-wall_thick+(fff-ff)/2,0])translate([wall_thick/2+wall_thick*sqrt(2)/4,wall_thick/2+wall_thick*sqrt(2)/4,(j+gate_plate_thick)-scwl-tol-geo]) cylinder(scwl+tol+2*geo,1.5,1.5);

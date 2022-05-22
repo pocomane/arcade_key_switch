@@ -4,7 +4,7 @@ use <arcade_key_switch.scad>;
 
 module main(){
   /* slice(thick=0.2,start=[0,0,0]) */
-    housing();
+    arcade_key_switch();
 }
 
 // --------------------------------------------------------------------------------
