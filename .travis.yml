@@ -1,0 +1,23 @@
+language: openscad
+
+matrix:
+  include:
+    - os: linux
+      env: TARGET="linux"
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file_glob: true
+  file: build/*.stl
+  skip_cleanup: true
+
+branches:
+  only:
+    - master
+
+install:
+  - echo "nothing to do"
+
+script:
+  - sh build.sh
