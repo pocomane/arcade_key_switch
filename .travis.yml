@@ -17,7 +17,7 @@ branches:
     - master
 
 install:
-  - apt-get install openscad
+  - sudo apt-get install openscad
 
 script:
   - sh build.sh
