@@ -37,11 +37,11 @@ module slice(direction = [0, 0, 1], start = [0, 0, 0], thick = 10000000, debug =
   intersection(){
     translate(start)
       inclinate(direction){
-        translate([-10^6/2, -10^6/2, 0])
+        translate([-5000000, -5000000, 0])
           if (debug) {
-            #cube(size=[10^6, 10^6, thick]);
+            #cube(size=[10000000, 10000000, thick]);
           } else {
-            cube(size=[10^6, 10^6, thick]);
+            cube(size=[10000000, 10000000, thick]);
           }
     }
     children();
