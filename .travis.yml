@@ -17,7 +17,7 @@ branches:
     - master
 
 install:
-  - echo "nothing to do"
+  - apt-get install openscad
 
 script:
   - sh build.sh
