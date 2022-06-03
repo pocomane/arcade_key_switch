@@ -11,9 +11,9 @@ module arcade_key_switch(
   wall_thick = 4,
   base_thick = 4,
 
-  gate_size = 17.6, //17.1
+  gate_square = 17.6, //17.1
+  gate_round = 17.6, //17.1
   gate_inclination = 10,//0,
-  gate_is_round = true,//false;//true,
 
   gate_border = 2.5,//2,
   gate_max_tick = 0.9,
@@ -23,11 +23,13 @@ module arcade_key_switch(
   add_gate = true,
 ){
 
+  gate_size = max(gate_square, gate_round);
+
   ff = switch_distance -2 * wall_thick;
   fff = 35.2 -2 * wall_thick;
   
   xxx = 10.9 + tol;//10.9=actuator diameter at gate
-  xxm = (gate_size -xxx) / 2;
+  xxm = max(0, (gate_round -xxx) / 2);
   xxmm = xxm*( 1 -sin( gate_inclination));
 
   cci = 0.95; 
@@ -82,9 +84,9 @@ module arcade_key_switch(
   
   module gate_diamond_profile(){
     rotate([0,0,45]) intersection(){
-      circle(d=gate_size/cos(45),$fn=4);
-      rotate([0,0,gate_inclination]) circle(d=gate_size/cos(45),$fn=4);
-      rotate([0,0,-gate_inclination]) circle(d=gate_size/cos(45),$fn=4);
+      circle(d=gate_square/cos(45),$fn=4);
+      rotate([0,0,gate_inclination]) circle(d=gate_square/cos(45),$fn=4);
+      rotate([0,0,-gate_inclination]) circle(d=gate_square/cos(45),$fn=4);
     }
   }
 
@@ -102,7 +104,10 @@ module arcade_key_switch(
   module gate_hole(){
     translate([0,0,gate_border+gate_plate_thick+2*geo]) rotate([180,0,0])
       linear_extrude(height=gate_border+gate_plate_thick+2*geo, scale=cci) 
-        if (gate_is_round) { gate_round_profile(); } else { gate_diamond_profile(); }
+        union() {
+          if (gate_round > 0) gate_round_profile();
+          gate_diamond_profile();
+        }
   }
 
   module gate(){
