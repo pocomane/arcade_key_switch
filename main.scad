@@ -1,6 +1,7 @@
 
 use <util.scad>;
 use <arcade_key_switch.scad>;
+use <microswitch_obstruction.scad>;
 
 BUILD = "overview";
 
@@ -28,6 +29,9 @@ module main(){
   if (BUILD == "base_slice"){
     // This is useful to check if all the measurements are right
     slice(thick=0.2,start=[0,0,0]) arcade_key_switch();
+  }
+  if (BUILD == "key_switch"){
+    microswitch_obstruction();
   }
 }
 

@@ -1,5 +1,6 @@
 
 use <util.scad>;
+use <microswitch_obstruction.scad>;
 
 $fn=100;  // number of face for circle
 geo=0.1;  // geometrical/graphical error to let the surface correctly appear melted together
@@ -60,14 +61,17 @@ module arcade_key_switch(
   }
 
   module frame(){
-    difference(){
+    rail_hole(50, [0,0,1], tol){
       cube(size=[wall_thick,ff,j]);
-      translate([-geo,(ff-h)/2,base_thick])cube(size=[wall_thick+2*geo,h,ff-base_thick+geo]);
-      translate([wall_thick/2-g/2,(ff-h)/2-b,base_thick-b])cube(size=[g,h+2*b,m+b+geo]);
+      translate([wall_thick/2,ff/2,j/2+1.6])
+        rotate([0,-90,180])
+          microswitch_obstruction();
     }
   }
 
-  module extended_frame(){ translate([-(ff-fff)/2,-(ff-fff)/2,0]){ translate([0,-wall_thick,0])cube(size=[wall_thick,wall_thick,j]);
+  module extended_frame(){
+    translate([-(ff-fff)/2,-(ff-fff)/2,0]){
+      translate([0,-wall_thick,0])cube(size=[wall_thick,wall_thick,j]);
       frame();
       uuu=5;
       translate([wall_thick,0,0])rotate([0,0,45])translate([-uuu/2,-uuu/2,0])cube(size=[uuu,uuu,j]);

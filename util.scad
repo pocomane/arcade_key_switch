@@ -48,3 +48,19 @@ module slice(direction = [0, 0, 1], start = [0, 0, 0], thick = 10000000, debug =
   }
 }
 
+// Make an hole in an object to house another object. It will also make
+// the rail to let the second object be inserted in the first one along
+// the wanted "direction", for the wanted "length"
+module rail_hole(length, direction, tolerance = 1e-300){
+  difference(){
+    children(0);
+    minkowski(){
+      inclinate(direction)
+       translate([-tolerance/2,-tolerance/2,-tolerance/2])
+         cube([tolerance,tolerance,length+tolerance]);
+      for (c=[1:$children-1])
+        children(c);
+    }
+  }
+}
+
