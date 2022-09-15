@@ -12,8 +12,8 @@ module arcade_key_switch(
   wall_thick = 4,
   base_thick = 4,
 
-  gate_square = 17.6, //17.1
-  gate_round = 17.6, //17.1
+  gate_square = 17.5, //17.1
+  gate_round = 17.5, //17.1
   gate_inclination = 10,//0,
 
   gate_border = 2.5,//2,
@@ -87,10 +87,9 @@ module arcade_key_switch(
   }
   
   module gate_diamond_profile(){
-    rotate([0,0,45]) intersection(){
-      circle(d=gate_square/cos(45),$fn=4);
-      rotate([0,0,gate_inclination]) circle(d=gate_square/cos(45),$fn=4);
-      rotate([0,0,-gate_inclination]) circle(d=gate_square/cos(45),$fn=4);
+    resize(newsize=[gate_square, gate_square, 0]) rotate([0,0,45]) intersection(){
+      rotate([0,0,gate_inclination]) circle($fn=4);
+      rotate([0,0,-gate_inclination]) circle($fn=4);
     }
   }
 
