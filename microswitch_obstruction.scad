@@ -5,18 +5,18 @@ $fn = 100;
 
 module microswitch_obstruction(){
 
-  fh = 1.1;
-  fw = 16;
-  fv = 2.7;
-  fd = 16;
+  fh = 1;
+  fw = 15.6;
+  fv = 2.55;
+  fd = 15.6;
 
   th = 5.1;
   tw = 9.5;
-  td = 12;
+  td = 11.8;
   to = 3.2;
 
-  md = 14;
-  mw = 14;
+  md = 13.80;
+  mw = 14.35;
 
   bh = 5.7;
   bw = 14;
@@ -46,21 +46,30 @@ module microswitch_obstruction(){
 
   xd = 1.025;
   xh = 1.25;
-  xw = 3;
-  xo = 4.8;
+  xw = 3.2;
+  xo = 4.65;
+
+  module trap(thick){
+    rotate([0, -90, 0]) linear_extrude(thick, center=true) polygon([
+        [ 0, -mw/2],
+        [ 0, mw/2],
+        [ th, to-mw/2+tw],
+        [ th, to-mw/2]
+    ]);
+  }
 
   difference(){
     translate([0,0,fh/2])union(){
 
       // top
-      rotate([0, -90, 0]) linear_extrude(td, center=true) polygon([
-          [ 0, -mw/2],
-          [ 0, mw/2],
-          [ th, to-mw/2+tw],
-          [ th, to-mw/2]
-      ]);
-      translate([-td/2-xd,-xo+fw/2,0]) cube([td+2*xd,xw,xh]);
-      translate([-td/2-xd,xo-fw/2-xw+1,0]) cube([td+2*xd,xw,xh]);
+      trap(td);
+      intersection(){
+        trap(td+2*xd);
+        union(){
+          translate([-td/2-xd, -xo+fw/2,0]) cube([td+2*xd, xo, xh]);
+          translate([-td/2-xd, -fw/2, 0]) cube([td+2*xd, xo, xh]);
+        }
+      }
 
       // bottom
       translate([0,0,-bt/2]) cube([md,bw,bt], center=true);

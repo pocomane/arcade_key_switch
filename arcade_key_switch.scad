@@ -22,6 +22,7 @@ module arcade_key_switch(
 
   add_housing = true,
   add_gate = true,
+  key_extend = false,
 ){
 
   gate_size = max(gate_square, gate_round);
@@ -164,6 +165,32 @@ module arcade_key_switch(
         cube(size=[grh,grw,grh+geo]);
   }
 
+  module key_extension(){
+    w = 5.1;
+    h = 6.6;
+    we = 4.6 - tol;
+    he = 6.15 - tol;
+    wt = 1.3 + tol;
+    ht = 1.1 + tol;
+    ex = 0.4;
+    hd = 3.5;
+    at = (we-ht)/2;
+    bt = (he-wt)/2;
+    dx = ht/2 + at/2;
+    dy = wt/2 + bt/2;
+    translate([0, 0, ex + hd/2]) difference(){
+      union() {
+        translate([0, 0, -ex/2 -hd/2]) cube(center=true, [w, h, ex]);
+        translate([+dx, +dy, 0]) cube(center=true, [at, bt, hd]);
+        translate([+dx, -dy, 0]) cube(center=true, [at, bt, hd]);
+        translate([-dx, -dy, 0]) cube(center=true, [at, bt, hd]);
+        translate([-dx, +dy, 0]) cube(center=true, [at, bt, hd]);
+      }
+      translate([0, 0, 1.4*hd]) rotate([0,45,0]) cube(center=true, [he,he,he]);
+      translate([0, 0, 1.4*hd]) rotate([45,0,0]) cube(center=true, [he,he,he]);
+    }
+  }
+
   module full(){
     difference(){
       union(){
@@ -177,6 +204,12 @@ module arcade_key_switch(
       }
       translate([0,wall_thick,0]) color([1,1,0])four_side()ls56_groove();
       translate([0,wall_thick,0])four_side()translate([(fff-ff)/2,-wall_thick+(fff-ff)/2,0])translate([wall_thick/2+wall_thick*sqrt(2)/4,wall_thick/2+wall_thick*sqrt(2)/4,(j+gate_plate_thick)-scwl-tol-geo]) cylinder(scwl+tol+2*geo,1.5,1.5);
+    }
+    if (key_extend){
+      translate([-15,0,0]) key_extension();
+      translate([-25,0,0]) key_extension();
+      translate([-15,15,0]) key_extension();
+      translate([-25,15,0]) key_extension();
     }
   }
 

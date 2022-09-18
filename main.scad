@@ -8,7 +8,7 @@ BUILD = "overview";
 module main(){
   if (BUILD == "overview"){
     // Full default model for showcase purpose
-    arcade_key_switch(gate_round = 0, gate_inclination = 10);
+    arcade_key_switch(key_extend = true, gate_round = 0, gate_inclination = 10);
   }
   if (BUILD == "housing"){
     arcade_key_switch(add_gate = false);
